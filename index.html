@@ -85,9 +85,9 @@ header{
 
 /* Visible slogan shown in header when logo is removed */
 .brand-slogan{
-  font-size:18px;
+  font-size:22px;
   color:#ffffff;
-  font-weight:700;
+  font-weight:800;
   display:inline-block;
 }
 /* Brand layout and logo sizing */
@@ -105,7 +105,7 @@ header{
 .brand-link:focus{outline:3px solid rgba(29,211,176,.25);outline-offset:3px;border-radius:6px}
 @media(max-width:600px){
   .brand-logo{height:34px}
-  .brand-slogan{font-size:16px}
+  .brand-slogan{font-size:18px}
 }
 nav a{
   color:var(--muted);
@@ -197,7 +197,7 @@ nav a:hover{color:#fff}
   text-align:center;
   background:
     linear-gradient(180deg,rgba(5,11,16,.65),rgba(5,11,16,.95)),
-    url('https://images.unsplash.com/photo-1587831990711-23ca6441447b') center/cover fixed no-repeat;
+    url('https://github.com/techmobilesolucoes/Home/blob/main/laboratorio.jpg?raw=true') center/cover fixed no-repeat;
 }
 .hero-inner{
   max-width:900px;
@@ -219,7 +219,7 @@ nav a:hover{color:#fff}
   /* subtle dark overlay + tech-related image (replace URL if desired) */
   background:
     linear-gradient(180deg, rgba(5,11,16,.6), rgba(5,11,16,.6)),
-    url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    url('https://github.com/techmobilesolucoes/Home/blob/main/tecnico%20trabalhando.jpg?raw=true') center/cover no-repeat;
   border-radius:calc(var(--radius) - 6px);
   padding:100px 20px; /* slightly more vertical space */
 }
@@ -324,14 +324,26 @@ section{
   animation:scroll 22s infinite linear;
   align-items:center; /* center images vertically inside the track */
 }
-.carousel img{
-  /* ensure each image takes 1/4 of the track (4 images) and scales without cropping */
-  flex:0 0 25%;
-  width:100%;
+.carousel{
+  /* fix height so images fill the carousel and avoid vertical gaps */
   height:320px;
-  object-fit:contain; /* show whole image */
-  object-position:center;
-  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.04)); /* subtle background for letterboxing */
+}
+.carousel-track{
+  display:flex;
+  width:400%;
+  animation:scroll 22s infinite linear;
+  align-items:stretch; /* make images stretch to track height */
+  gap:0; /* ensure no gaps between items */
+}
+.carousel img{
+  /* ensure each image takes 1/4 of the track (4 images) and fills its slot without gaps */
+  flex:0 0 25%;
+  width:25%;
+  height:100%;
+  object-fit:cover; /* fill and crop to avoid letterboxing */
+  display:block;
+  margin:0;
+  padding:0;
 }
 @keyframes scroll{
   0%{transform:translateX(0)}
@@ -420,7 +432,8 @@ footer{
 
 @media(max-width:600px){
   .hero h2{font-size:32px}
-  .carousel img{height:200px}
+  .carousel{height:200px}
+  .carousel img{height:100%}
   .whatsapp-float{
     width:58px;
     height:58px;
@@ -476,8 +489,8 @@ footer{
   <h2>Nossos Serviços</h2>
   <div class="carousel">
     <div class="carousel-track">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/IMAC.jpg?raw=true" alt="Serviço - Foto 1" loading="lazy" decoding="async">
-      <img src="https://github.com/techmobilesolucoes/Home/blob/main/PLACA%20MAC.jpg?raw=true" alt="Serviço - Foto 2" loading="lazy" decoding="async">
+      <img src="https://github.com/techmobilesolucoes/Home/blob/main/pcgamer-tecnico-servico-manutencao.jpg?raw=true" alt="Serviço - Foto 1" loading="lazy" decoding="async">
+      <img src="https://github.com/techmobilesolucoes/Home/blob/main/assistencia_tecnica_macbook_brasilia_aguas_claras_1080x.jpg?raw=true" alt="Serviço - Foto 2" loading="lazy" decoding="async">
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/iphone%20aberto.jpg?raw=true" alt="Serviço - Foto 3" loading="lazy" decoding="async">
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/assistencia%20notebook.jpg?raw=true" alt="Serviço - Foto 4" loading="lazy" decoding="async">
     </div>
@@ -539,7 +552,7 @@ footer{
 
 <!-- DEPOIMENTOS -->
 <section id="depoimentos" class="testimonials animate" role="region" aria-labelledby="depoimentos-heading">
-  <h2 id="depoimentos-heading">Depoimentos de Clientes</h2>
+  <h2 id="depoimentos-heading">Oque nossos clientes dizem</h2>
   <div class="grid">
     <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
       <meta itemprop="author" content="Paula Silva">
@@ -625,6 +638,61 @@ footer{
       </div>
       <p itemprop="reviewBody">Trocaram o conector de carga do meu iPhone rapidamente, sem perder meus dados. Ótimo atendimento.</p>
       <div class="meta"><span itemprop="author">Beatriz Costa</span> <small>Florianópolis — Troca de conector de carga (iPhone 15 pro Max)</small></div>
+      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="bestRating" content="5">
+      </div>
+    </div>
+
+    <!-- Additional testimonials -->
+    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
+      <meta itemprop="author" content="Ricardo Mendes">
+      <meta itemprop="datePublished" content="2025-01-06">
+      <div class="stars" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+      </div>
+      <p itemprop="reviewBody">Recuperei fotos e documentos importantes — serviço muito profissional e rápido. Recomendo para qualquer problema de recuperação de dados.</p>
+      <div class="meta"><span itemprop="author">Ricardo Mendes</span> <small>Florianópolis — Recuperação de dados (notebook)</small></div>
+      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="bestRating" content="5">
+      </div>
+    </div>
+
+    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
+      <meta itemprop="author" content="Fernanda Lima">
+      <meta itemprop="datePublished" content="2025-01-07">
+      <div class="stars" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+      </div>
+      <p itemprop="reviewBody">Trocaram a bateria do meu celular em menos de uma hora — excelente serviço e garantia entregue conforme combinado.</p>
+      <div class="meta"><span itemprop="author">Fernanda Lima</span> <small>Florianópolis — Substituição de bateria (Iphone 13)</small></div>
+      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="bestRating" content="5">
+      </div>
+    </div>
+
+    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
+      <meta itemprop="author" content="Lucas Almeida">
+      <meta itemprop="datePublished" content="2025-01-08">
+      <div class="stars" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
+      </div>
+      <p itemprop="reviewBody">Fiz a troca da tela do meu notebook — trabalho impecável, preço justo e entrega dentro do prazo.</p>
+      <div class="meta"><span itemprop="author">Lucas Almeida</span> <small>Florianópolis — Troca de tela (notebook)</small></div>
       <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
         <meta itemprop="ratingValue" content="5">
         <meta itemprop="bestRating" content="5">
