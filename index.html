@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <!-- site favicon -->
-  <link rel="icon" href="https://github.com/techmobilesolucoes/Home/blob/main/logotech.jpg?raw=true" type="image/jpeg">
+  <link rel="icon" href="https://github.com/techmobilesolucoes/Home/blob/main/LOGOFINAL2CORSITE.jpg?raw=true" type="image/jpeg">
 
 <style>
 :root{
@@ -66,8 +66,9 @@ header{
   padding:18px 20px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-}
+  justify-content:space-between; /* brand left, nav center, badge right */
+  gap:36px; /* more breathing room */
+}  
 .brand h1{
   margin:0;
   font-weight:800;
@@ -97,23 +98,55 @@ header{
   gap:12px;
 }
 .brand-logo{
-  height:42px;
+  height:110px; /* larger on desktop */
   width:auto;
+  max-width:320px;
+  object-fit:contain;
   display:block;
 }
+.header-badge{margin-left:36px;display:flex;align-items:center}
+.header-badge-img{height:110px;width:auto;max-width:320px;object-fit:contain;display:block}  
+
 .brand-link{display:inline-flex;align-items:center;text-decoration:none;color:inherit}
 .brand-link:focus{outline:3px solid rgba(29,211,176,.25);outline-offset:3px;border-radius:6px}
 @media(max-width:600px){
-  .brand-logo{height:34px}
+  .brand-logo{height:80px}
+  .header-badge-img{height:80px}
   .brand-slogan{font-size:18px}
-}
+}    
 nav a{
   color:var(--muted);
   text-decoration:none;
   margin-left:18px;
   font-size:14px;
+  padding:8px 10px 14px; /* extra bottom padding to make room for underline */
+  border-radius:8px;
+  transition:all .15s ease;
+  position:relative;
 }
-nav a:hover{color:#fff}
+nav a:hover, nav a:focus{
+  color:#fff;
+  outline:3px solid rgba(29,211,176,.28);
+  outline-offset:4px;
+  background:rgba(29,211,176,.03);
+}
+/* Underline indicator for active/selected nav link */
+nav a::after{
+  content:'';
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:6px;
+  height:4px;
+  background:var(--primary);
+  border-radius:4px;
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .18s ease;
+}
+nav a.active::after{transform:scaleX(1)}
+nav a.active{color:#fff}
+
 
 /* Hamburger / responsive nav */
 .nav-toggle{
@@ -148,7 +181,7 @@ nav a:hover{color:#fff}
   position:static;
 }
 @media(max-width:900px){
-  .header-wrap{position:relative}
+  .header-wrap{position:relative;justify-content:space-between}
   .nav-toggle{display:inline-flex;align-items:center}
   .primary-nav{
     position:absolute;
@@ -167,10 +200,14 @@ nav a:hover{color:#fff}
   }
   .primary-nav.open{max-height:420px;opacity:1}
   .primary-nav a{display:block;padding:14px 20px;margin-left:0;border-top:1px solid rgba(255,255,255,.03);font-size:16px}
-}
+  section{ scroll-margin-top:90px; }
+  .header-badge{display:none} /* hide badge on small screens */
+}  
 @media(min-width:901px){
-  .primary-nav{display:flex;gap:18px;align-items:center}
-}
+  .primary-nav{display:flex;gap:22px;align-items:center;flex:1;justify-content:center;max-width:60%}
+  .brand{margin-right:48px}
+  .header-badge{margin-left:48px}
+}  
 
 /* BOTÕES */
 .btn{
@@ -233,7 +270,8 @@ section{
   max-width:var(--max);
   margin:auto;
   padding:80px 20px;
-}
+  scroll-margin-top:130px; /* offset for taller sticky header when navigating via anchors */
+}  
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -376,7 +414,7 @@ section{
   #depoimentos{background-attachment:scroll;padding:48px 16px}
 }
 .testimonial-card{background:linear-gradient(180deg,#07101a,#061018);border-radius:14px;padding:24px;border:1px solid rgba(255,255,255,.04)}
-.testimonial-card .stars{display:flex;gap:6px;margin-bottom:10px;color:var(--primary)}
+.testimonial-card .stars{display:flex;gap:6px;margin-bottom:10px;color:#FFD700}
 .testimonial-card p{color:var(--muted);margin:0 0 12px}
 .testimonial-card .meta{font-weight:700;color:#fff;font-size:14px}
 .testimonial-card .meta small{display:block;color:var(--muted);font-weight:400}
@@ -453,10 +491,9 @@ footer{
   <div class="header-wrap">
       <div class="brand">
         <h1>
-          <!-- Link para a página inicial mantida apenas para leitores de tela -->
-          <a href="/" class="brand-link sr-only" aria-label="Ir para página inicial">Tech Mobile Floripa Assistência Técnica Express</a>
-          <!-- Slogan visível agora NÃO é um link -->
-          <span class="brand-slogan">Tech Mobile Floripa Assistência Técnica Express. Consertos rápidos onde você estiver.</span>
+          <a href="/" class="brand-link" aria-label="Ir para página inicial">
+            <img src="https://github.com/techmobilesolucoes/Home/blob/main/LOGOFINAL2CORSITE.jpg?raw=true" alt="Tech Mobile Floripa" class="brand-logo" loading="eager" decoding="async">
+          </a>
         </h1>
       </div>
       <!-- Hamburger menu toggle (visible on small screens) -->
@@ -466,18 +503,19 @@ footer{
     <nav id="primary-nav" class="primary-nav">
       <a href="#servicos">Serviços</a>
       <a href="#como">Como funciona</a>
-      <a href="#indicacao">Indicação</a>
       <a href="#garantia">Garantia</a>
     </nav>
+    <div class="header-badge" aria-hidden="true">
+      <img src="https://github.com/techmobilesolucoes/Home/blob/main/parcelamento10x.jpg?raw=true" alt="Parcelamento 10x" class="header-badge-img" loading="eager" decoding="async">
+    </div>
   </div>
 </header>
 
 <section class="hero animate">
   <div class="hero-inner">
-    <h2>Conserto <span>Express</span> de Celulares, Notebooks e Computadores em <span>Florianópolis e Região</span></h2>
+    <h2>Conserto de Celulares, Notebooks e Computadores em <span>Florianópolis e Região</span></h2>
     <p>
-      Técnicos especializados em todas as marcas. Atendimento no local para maior agilidade.
-      Mas se for necessário contamos com um aboratório especializado com a melhor tecnologia para um serviço de alto nivel.
+      Consertamos seu aparelho aonde você estiver. Atendimento agil e transparente.
     </p>
     <a class="btn btn-whatsapp" href="https://wa.me/5548998049084" target="_blank" rel="noopener noreferrer" title="Abrir conversa no WhatsApp">
       Solicitar Orçamento Gratuito
@@ -498,67 +536,53 @@ footer{
 </section>
 
 <section id="servicos">
-  <h2 class="animate">Nossos Serviços</h2>
+  <h2 class="animate">Serviços</h2>
   <div class="grid">
     <div class="card animate delay-1" tabindex="0">
       <img src="https://iphoneros.com/wp-content/uploads/2022/09/tapatrasera-1392x832.jpg" alt="Troca de telas" loading="lazy" decoding="async">
       <div class="card-content">
-        <span class="badge">Vamos até você</span>
-        <h3>Conserto Express</h3>
-        <p>Consertamos seu Celular, Notebook ou Computador de forma rapida e honesta.</p>
+        <span class="badge">Consertos rapidos</span>
+        <h3>Celulares</h3>
+        <p>Troca de tela. Troca de bateria. Troca de conector de carga. Troca de vidro traseiro.</p>
       </div>
     </div>
 
     <div class="card animate delay-2" tabindex="0">
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/reparo%20em%20placa%20iphone.jpg?raw=true" alt="Reparo em placas" loading="lazy" decoding="async">
       <div class="card-content">
-        <span class="badge">Laboratórios</span>
-        <h3>Estamos prontos para recuperar seu aparelho</h3>
-        <p>Contamos com laboratório completo e técnicos especializados para oferecer um serviço de alto nível.</p>
+        <span class="badge">Reparos avançados</span>
+        <h3>Reparo em placa de celulares</h3>
+        <p>Nosso laboratório conta com ferramentas de ultima geração para realizar reparos avançados.</p>
       </div>
     </div>
 
     <div class="card animate delay-3" tabindex="0">
       <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Serviços multimarcas" loading="lazy" decoding="async">
       <div class="card-content">
-        <span class="badge">Do básico ao Avançado</span>
-        <h3>Nosso laboratório conta com ferramentas de ultima geração para realizar reparos avançados.</h3>
-        <p>Garantindo um serviço qualidade e excelência que você merece.</p>
+        <span class="badge">Reparos avançados Notebooks e Macbooks</span>
+        <h3>Somos especializados em reparos de notebooks e Macbooks</h3>
+        <p>Troca de tela. Troca de bateria. Troca de teclado. Limpeza preventiva. Formatação. Upgrade. Reparo em placa.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section id="como" class="highlight">
-  <h2 class="animate">Como funciona o atendimento</h2>
+  <h2 class="animate">Como funciona?</h2>
   <div class="steps">
-    <div class="step animate delay-1">Contato via WhatsApp</div>
-    <div class="step animate delay-2">Análise do serviço</div>
-    <div class="step animate delay-3">Conserto no local ou laboratório</div>
-    <div class="step animate">Técnicos treinados e capacitados</div>
-    <div class="step animate">Laboratório de ultima geração</div>
-    <div class="step animate">Buscamos e Entregamos</div>
-    <div class="step animate">Garantia pode ser acionada via Whatsapp</div>
-    <div class="step animate">Todos os nossos serviços contam garantia</div>
+    <div class="step animate delay-1">Você solicita atendimento via WhatsApp.</div>
+    <div class="step animate delay-2">Agenda a visita técnica.</div>
+    <div class="step animate delay-3">O técnico vai até você.</div>
   </div>
 </section>
 
-<section id="indicacao">
-  <h2 class="animate">Programa de Indicação</h2>
-  <div class="card animate">
-    <div class="card-content">
-      <h3>Indicou, Aprovou, Ganhou!</h3>
-      <p>Se você indicar um cliente e ele aprovar o orçamento, você ganha por isso.</p>
-    </div>
-  </div>
-</section>
 
 <!-- DEPOIMENTOS -->
 <section id="depoimentos" class="testimonials animate" role="region" aria-labelledby="depoimentos-heading">
-  <h2 id="depoimentos-heading">Oque nossos clientes dizem</h2>
+  <h2 id="depoimentos-heading">Somos 5 Estrelas no Google. Veja oque dizem nossos cliente.</h2>
   <div class="grid">
     <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Paula Silva">
+      <meta itemprop="author" content="Victor Bentos">
       <meta itemprop="datePublished" content="2025-01-01">
       <div class="stars" aria-hidden="true">
         <svg width="18" height="18" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
@@ -567,8 +591,8 @@ footer{
         <svg width="18" height="18" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
         <svg width="18" height="18" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
       </div>
-      <p itemprop="reviewBody">Excelente atendimento: troquei a tela do meu celular em menos de uma hora. Recomendo para quem precisa de atendimento rápido.</p>
-      <div class="meta"><span itemprop="author">Paulo Silva</span> <small>Florianópolis</small></div>
+      <p itemprop="reviewBody">Veio até minha casa e para minha surpresa me mostrou que o problema do meu telefone era muito mais simples do que eu esperava, consertando na hora, pela honestidade transparência e profissionalismo, indico totalmente.</p>
+      <div class="meta"><span itemprop="author">Victor Bentos</span></div>
       <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
         <meta itemprop="ratingValue" content="5">
         <meta itemprop="bestRating" content="5">
@@ -576,7 +600,7 @@ footer{
     </div>
 
     <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Carlos Pereira">
+      <meta itemprop="author" content="Abigail Vaccaro">
       <meta itemprop="datePublished" content="2025-01-02">
       <div class="stars" aria-hidden="true">
         <svg width="18" height="18" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
@@ -585,8 +609,8 @@ footer{
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
       </div>
-      <p itemprop="reviewBody">Recuperei arquivos importantes do meu notebook - serviço rápido e sem surpresas. Atendimento local foi ótimo.</p>
-      <div class="meta"><span itemprop="author">Carlos Pereira</span> <small>Florianópolis</small></div>
+      <p itemprop="reviewBody">Excelente profissional, de confiança. Levou nossos aparelhos e realizou o serviço no mesmo dia. Indico e confio! Obrigada pelo atendimento.</p>
+      <div class="meta"><span itemprop="author">Abigail Vaccaro</span></div>
       <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
         <meta itemprop="ratingValue" content="5">
         <meta itemprop="bestRating" content="5">
@@ -594,7 +618,7 @@ footer{
     </div>
 
     <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Mariana Souza">
+      <meta itemprop="author" content="Paulo Bossle">
       <meta itemprop="datePublished" content="2025-01-03">
       <div class="stars" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
@@ -603,99 +627,8 @@ footer{
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
       </div>
-      <p itemprop="reviewBody">Meu MacBook voltou a funcionar após conserto na placa. Serviço técnico com garantia e ótimos prazos.</p>
-      <div class="meta"><span itemprop="author">Mariana Souza</span> <small>Florianópolis</small></div>
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="João Oliveira">
-      <meta itemprop="datePublished" content="2025-01-04">
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-      <p itemprop="reviewBody">Trocamos a bateria e ficou ótimo - agora o aparelho dura o dia todo. Atendimento rápido em casa.</p>
-      <div class="meta"><span itemprop="author">João Oliveira</span> <small>Florianópolis</small></div>
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Beatriz Costa">
-      <meta itemprop="datePublished" content="2025-01-05">
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-      <p itemprop="reviewBody">Trocaram o conector de carga do meu iPhone rapidamente, sem perder meus dados. Ótimo atendimento.</p>
-      <div class="meta"><span itemprop="author">Beatriz Costa</span> <small>Florianópolis</small></div>
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <!-- Additional testimonials -->
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Ricardo Mendes">
-      <meta itemprop="datePublished" content="2025-01-06">
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-      <p itemprop="reviewBody">Recuperei fotos e documentos importantes - serviço muito profissional e rápido. Recomendo para qualquer problema de recuperação de dados.</p>
-      <div class="meta"><span itemprop="author">Ricardo Mendes</span> <small>Florianópolis</small></div>
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Fernanda Lima">
-      <meta itemprop="datePublished" content="2025-01-07">
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-      <p itemprop="reviewBody">Trocaram a bateria do meu celular em menos de uma hora - excelente serviço e garantia entregue conforme combinado.</p>
-      <div class="meta"><span itemprop="author">Fernanda Lima</span> <small>Florianópolis</small></div>
-      <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
-        <meta itemprop="ratingValue" content="5">
-        <meta itemprop="bestRating" content="5">
-      </div>
-    </div>
-
-    <div class="testimonial-card animate" itemscope itemtype="http://schema.org/Review">
-      <meta itemprop="author" content="Lucas Almeida">
-      <meta itemprop="datePublished" content="2025-01-08">
-      <div class="stars" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L23.4 9.748l-5.7 5.556L19.336 24 12 20.013 4.664 24l1.636-8.696L.6 9.748l7.732-1.73L12 .587z"/></svg>
-      </div>
-      <p itemprop="reviewBody">Fiz a troca da tela do meu notebook - trabalho impecável, preço justo e entrega dentro do prazo.</p>
-      <div class="meta"><span itemprop="author">Lucas Almeida</span> <small>Florianópolis</small></div>
+      <p itemprop="reviewBody">Precisei de atendimento na minha loja, a experiência foi incrivel, no mesmo dia já agendei outro serviço para meu computador pessoal. Serviço de qualidade e profissional.</p>
+      <div class="meta"><span itemprop="author">Paulo Bossle</span></div>
       <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" style="display:none">
         <meta itemprop="ratingValue" content="5">
         <meta itemprop="bestRating" content="5">
@@ -715,7 +648,7 @@ footer{
 
 <footer>
   <p>
-    <strong>Tech Mobile FLoripa Assistência Técnica Express</strong> © 2025 – <br>
+    <strong>Tech Mobile FLoripa Assistência Técnica de Celulares e Notebooks</strong> © 2025 – <br>
     Rua Ferdinand Demetz, 40 - Bela Vista, Palhoça - SC - CNPJ47.558.493/0001-43 <br>
   </p>
 </footer>
@@ -772,6 +705,56 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
     });
   }
+
+  // Smooth scroll with header offset for primary nav links
+  const navLinks = document.querySelectorAll('.primary-nav a[href^="#"]');
+  navLinks.forEach(link=>{
+    link.addEventListener('click',function(e){
+      const hash = this.getAttribute('href');
+      if(hash && hash.startsWith('#') && document.querySelector(hash)){
+        e.preventDefault();
+        const target = document.querySelector(hash);
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
+        window.scrollTo({top, behavior:'smooth'});
+        // give immediate visual feedback
+        navLinks.forEach(l=>l.classList.remove('active'));
+        this.classList.add('active');
+        // close mobile nav if open
+        if(window.innerWidth <= 900 && primaryNav.classList.contains('open')){
+          primaryNav.classList.remove('open');
+          navToggle.setAttribute('aria-expanded','false');
+        }
+      }
+    });
+  });
+
+  // Scrollspy - mark the nav item active for the section visible on screen
+  const sections = document.querySelectorAll('section[id]');
+  const sectionObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector('.primary-nav a[href="#'+id+'"]');
+      if(entry.isIntersecting){
+        navLinks.forEach(l=>l.classList.remove('active'));
+        if(link) link.classList.add('active');
+      }
+    });
+  },{root:null, rootMargin:'0px 0px -60% 0px', threshold:0.15});
+  sections.forEach(s=>sectionObserver.observe(s));
+
+  // Set initial active link on load (in case some section is already in view)
+  setTimeout(()=>{
+    const firstVisible = Array.from(sections).find(s=>{
+      const rect = s.getBoundingClientRect();
+      return rect.top <= (window.innerHeight/2) && rect.bottom > (window.innerHeight/2);
+    });
+    if(firstVisible){
+      const link = document.querySelector('.primary-nav a[href="#'+firstVisible.id+'"]');
+      if(link){ navLinks.forEach(l=>l.classList.remove('active')); link.classList.add('active'); }
+    }
+  },120);
+
 });
 </script>
 
@@ -808,6 +791,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+
 
 
 
