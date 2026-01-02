@@ -273,6 +273,57 @@ nav a.active{color:#fff}
   background: #ffffff;
 }
 
+/* POPUP AVISO LEGAL */
+.legal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.legal-modal{
+  background:linear-gradient(180deg,#0a1620,#050b10);
+  border-radius:18px;
+  max-width:420px;
+  width:90%;
+  padding:28px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 40px 80px rgba(0,0,0,.7);
+  text-align:center;
+}
+
+.legal-modal h2{
+  margin-top:0;
+  color:#ffffff;
+}
+
+.legal-modal p{
+  color:#a9b4bb;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:16px;
+}
+
+.legal-btn{
+  margin-top:12px;
+  padding:14px 32px;
+  border:none;
+  border-radius:999px;
+  background:#1dd3b0;
+  color:#001018;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+.legal-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 40px rgba(29,211,176,.4);
+}
 
 /* Background for Serviços Express section */
 #servicos{
@@ -509,6 +560,41 @@ footer{
 </head>
 
 <body>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("legal-popup");
+  const acceptBtn = document.getElementById("legal-accept");
+
+  if (!localStorage.getItem("legalAccepted")) {
+    popup.style.display = "flex";
+    popup.setAttribute("aria-hidden", "false");
+  } else {
+    popup.style.display = "none";
+  }
+
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("legalAccepted", "true");
+    popup.style.display = "none";
+    popup.setAttribute("aria-hidden", "true");
+  });
+});
+</script>
+
+
+  <!-- POPUP AVISO LEGAL -->
+<div id="legal-popup" class="legal-overlay" aria-hidden="true">
+  <div class="legal-modal" role="dialog" aria-labelledby="legal-title" aria-modal="true">
+    <h2 id="legal-title">Aviso Legal</h2>
+
+    <p>
+      A <strong>Tech Mobile Floripa</strong> é uma empresa independente, especializada na prestação de serviços de diagnóstico, manutenção e reparo de celulares, notebooks e computadores de diversas marcas e modelos. Não possuimos vínculo, afiliação, autorização ou representação oficial com fabricantes como Apple, Samsung, Motorola, Xiaomi, Dell, HP, Lenovo ou quaisquer outras marcas mencionadas em nosso site. Todas as marcas, nomes comerciais e logotipos citados pertencem exclusivamente aos seus respectivos proprietários e são utilizados apenas para fins de identificação dos dispositivos atendidos. Os serviços prestados pela Tech Mobile Floripa são realizados com base na experiência técnica de seus profissionais.
+    </p>
+
+    <button id="legal-accept" class="legal-btn">
+      Entendi e continuar
+    </button>
+  </div>
+</div>
 
 <header>
   <div class="header-wrap">
@@ -527,6 +613,7 @@ footer{
       <a href="#servicos">Serviços</a>
       <a href="#como">Como funciona</a>
       <a href="#Quem Somos">Quem Somos</a>
+      <a href="#Aviso Legal">Aviso Legal</a>
     </nav>
     <div class="header-badge" aria-hidden="true">
       <img src="https://github.com/techmobilesolucoes/Home/blob/main/parcelamento10x.jpg?raw=true" alt="Parcelamento 10x" class="header-badge-img" loading="eager" decoding="async">
@@ -739,16 +826,17 @@ Para maior comodidade e agilidade, oferecemos atendimento a domicílio, garantin
   </a>
 </section>
 
+<section id="Aviso Legal" class="cta">
+  <h2 class="animate">Aviso Legal</h2>
+  <p class="animate"><p>
+      A <strong>Tech Mobile Floripa</strong> é uma empresa independente, especializada na prestação de serviços de diagnóstico, manutenção e reparo de celulares, notebooks e computadores de diversas marcas e modelos. Não possuimos vínculo, afiliação, autorização ou representação oficial com fabricantes como Apple, Samsung, Motorola, Xiaomi, Dell, HP, Lenovo ou quaisquer outras marcas mencionadas em nosso site. Todas as marcas, nomes comerciais e logotipos citados pertencem exclusivamente aos seus respectivos proprietários e são utilizados apenas para fins de identificação dos dispositivos atendidos. Os serviços prestados pela Tech Mobile Floripa são realizados com base na experiência técnica de seus profissionais.
+
+
+.</p>
+</section>
+
 <footer>
   <p>
-    <strong>Aviso Legal</strong> <br>
-
-A Tech Mobile Floripa Assistência Técnica é uma empresa independente, especializada na prestação de serviços de diagnóstico, manutenção e reparo de celulares, notebooks e computadores de diversas marcas e modelos.
-A Tech Mobile Floripa não possui vínculo, afiliação, autorização ou representação oficial com fabricantes como Apple, Samsung, Motorola, Xiaomi, Dell, HP, Lenovo ou quaisquer outras marcas mencionadas em nosso site. Todas as marcas, nomes comerciais e logotipos citados pertencem exclusivamente aos seus respectivos proprietários e são utilizados apenas para fins de identificação dos dispositivos atendidos.
-Os serviços prestados pela Tech Mobile Floripa são realizados com base na experiência técnica de seus profissionais, podendo envolver o uso de peças novas, recondicionadas ou compatíveis, conforme disponibilidade e escolha do cliente, sempre com total transparência antes da execução do serviço.
-A contratação de nossos serviços não implica manutenção ou preservação da garantia original do fabricante, sendo de responsabilidade do cliente verificar as condições de garantia junto ao fabricante antes de autorizar qualquer reparo.
-A Tech Mobile Floripa preza pela qualidade, segurança e transparência em todos os atendimentos, oferecendo garantia própria sobre os serviços executados, conforme informado no momento do atendimento.
-Em caso de dúvidas, nossa equipe está à disposição para esclarecimentos antes da contratação de qualquer serviço.
     <strong>Tech Mobile FLoripa Assistência Técnica de Celulares e Notebooks</strong> © 2026 – <br>
     Rua Ferdinand Demetz, 40 - Bela Vista, Palhoça - SC - CNPJ47.558.493/0001-43 <br>
   </p>
