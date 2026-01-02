@@ -273,6 +273,27 @@ nav a.active{color:#fff}
   background: #ffffff;
 }
 
+/* EFEITO FLASH HERO */
+.hero-flash{
+  animation:flashFade .6s ease;
+}
+
+@keyframes flashFade{
+  0%{
+    opacity:1;
+    text-shadow:none;
+  }
+  40%{
+    opacity:.2;
+    text-shadow:0 0 18px rgba(29,211,176,.9);
+  }
+  100%{
+    opacity:1;
+    text-shadow:none;
+  }
+}
+
+
 /* POPUP AVISO LEGAL */
 .legal-overlay{
   position:fixed;
@@ -562,6 +583,35 @@ footer{
 <body>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.getElementById("hero-text");
+
+  const textos = [
+    `<span>Assistência Técnica especializada</span> em Celulares, Notebooks e Computadores em
+     <span>Florianópolis e Região</span>`,
+
+    `<span>Reparo rápido e profissional</span> com Atendimento
+     <span>a Domicílio</span>`,
+
+    `<span>Especialistas em iPhone, MacBook e iMac</span>
+     com suporte para <span>todas as marcas</span>`
+  ];
+
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % textos.length;
+
+    hero.classList.remove("hero-flash");
+    void hero.offsetWidth; // força reflow para reiniciar animação
+    hero.classList.add("hero-flash");
+
+    hero.innerHTML = textos[index];
+  }, 5000);
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("legal-popup");
   const acceptBtn = document.getElementById("legal-accept");
 
@@ -623,7 +673,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <section class="hero animate">
   <div class="hero-inner">
-    <h2><span>Assistência Técnica especializada</span> em Celulares, Notebooks e Computadores em <span>Florianópolis e Região</span></h2>
+    <h2 id="hero-text">
+  <span>Assistência Técnica especializada</span> em Celulares, Notebooks e Computadores em
+  <span>Florianópolis e Região</span></h2>
     <p>
       Consertamos seu aparelho aonde você estiver. Atendimento agil e transparente.
     </p>
@@ -950,35 +1002,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 </body>
 </html>
 
-
-
-<!-- BOTÃO WHATSAPP FLUTUANTE -->
-<a href="https://wa.me/5548998049084"
-   target="_blank"
-   rel="noopener noreferrer"
-   title="Abrir conversa no WhatsApp"
-   class="whatsapp-float"
-   aria-label="Falar no WhatsApp">
-  <img src="https://github.com/techmobilesolucoes/Home/blob/main/logo%20whatsapp.jpg?raw=true" alt="WhatsApp" class="whatsapp-icon" loading="eager" decoding="async">
-</a>
-
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("show");
-      }
-    });
-  },{threshold:0.15});
-
-  document.querySelectorAll(".animate").forEach(el=>{
-    observer.observe(el);
-  });
-});
-</script>
-
-</body>
-</html>
 
 
